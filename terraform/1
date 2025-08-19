@@ -1,0 +1,10 @@
+output "kubeconfig_path" {
+  description = "Kubeconfig path for the kind cluster"
+  value       = kind_cluster.devops_cluster.kubeconfig_path
+}
+
+output "cluster_name" {
+  description = "The name of the kind cluster"
+  value       = kind_cluster.devops_cluster.name
+}
+
