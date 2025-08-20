@@ -37,5 +37,20 @@ terraform.rc
 *.key
 *.secret
 
+# Common development, log, and build files/folders
+logs/
+*.log
+tmp/
+temp/
+coverage/
+build/
+dist/
+.vscode/
+.idea/
+*.bak
+*.swp
+*.pid
+*.sqlite
+
 # Ignore all executable files
 *.exe
