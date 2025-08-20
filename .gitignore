@@ -14,6 +14,10 @@ data
 *.tfstate
 *.tfstate.*
 
+
+# Backup state files containing sensitive keys
+terraform.tfstate.backup
+
 # Crash log files
 crash.log
 crash.*.log
