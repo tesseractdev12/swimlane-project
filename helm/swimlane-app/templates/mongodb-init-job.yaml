@@ -1,0 +1,38 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-mongodb-init
+spec:
+  template:
+    spec:
+      containers:
+      - name: mongo-init
+        image: mongo:6.0
+        command:
+          - bash
+          - -c
+          - |
+            echo "Waiting for MongoDB pods to be ready..."
+            until mongosh --host {{ .Release.Name }}-mongodb-0.{{ .Release.Name }}-mongodb:27017 --eval "db.adminCommand('ping')" >/dev/null 2>&1; do
+              echo "Waiting for primary..."
+              sleep 5
+            done
+            until mongosh --host {{ .Release.Name }}-mongodb-1.{{ .Release.Name }}-mongodb:27017 --eval "db.adminCommand('ping')" >/dev/null 2>&1; do
+              echo "Waiting for secondary..."
+              sleep 5
+            done
+            echo "Both MongoDB pods are ready, initiating replica set..."
+            mongosh --host {{ .Release.Name }}-mongodb-0.{{ .Release.Name }}-mongodb:27017 <<EOF
+            rs.initiate({
+              _id: "rs0",
+              members: [
+                { _id: 0, host: "{{ .Release.Name }}-mongodb-0.{{ .Release.Name }}-mongodb:27017" },
+                { _id: 1, host: "{{ .Release.Name }}-mongodb-1.{{ .Release.Name }}-mongodb:27017" }
+              ]
+            })
+            EOF
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+      restartPolicy: OnFailure

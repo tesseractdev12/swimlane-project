@@ -1,0 +1,85 @@
+# Node modules and build artifacts
+node_modules/
+dist/
+build/
+coverage/
+logs/
+*.log
+*.bak
+*.swp
+*.pid
+
+# Environment and config files
+.env
+.env.*
+config/env/env.json
+
+# Terraform files and folders
+terraform/
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+**/.terraform/*
+**/.terraform.lock.hcl
+
+# Helm charts and related files
+helm/
+*.tgz
+
+# IDE/editor folders
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+
+# Certificates, keys, and secrets
+*.pem
+*.key
+*.crt
+*.csr
+*.secret
+
+# Test and temp files
+tmp/
+temp/
+*.sqlite
+
+# Docker ignore rules
+.git/
+.gitignore
+packer_cache/
+*.log
+*.pem
+*.key
+*.crt
+*.env
+secrets.yml
+vault.yml
+__pycache__/
+*.pyc
+*.pyo
+node_modules/
+.idea/
+.vscode/
+*.tfstate
+*.tfstate.backup
+.terraform/
+*.tar
+*.exe
+*.bak
+*.swp
+*.pid
+*.sqlite
+logs/
+tmp/
+temp/
+coverage/
+build/
+dist/
+.envrc
+*.env.*
+*.bak
+*.old
+*.vault
+*.gpg

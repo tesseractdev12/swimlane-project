@@ -1,0 +1,6 @@
+---
+- hosts: all
+  become: yes
+  roles:
+    - ntp
+    # Add other roles here as needed

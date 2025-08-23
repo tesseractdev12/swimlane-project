@@ -1,0 +1,43 @@
+---
+- name: Ensure NTP (chrony) is installed
+  apt:
+    name: chrony
+    state: present
+    update_cache: yes
+
+- name: Enable and start NTP service
+  systemd:
+    name: chrony
+    enabled: yes
+    state: started
+
+- name: Install Kubernetes dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+
+- name: Add Kubernetes apt key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Add Kubernetes repository
+  apt_repository:
+    repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+
+- name: Install kubelet, kubeadm, kubectl
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - kubelet
+    - kubeadm
+    - kubectl

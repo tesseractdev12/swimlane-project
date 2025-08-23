@@ -1,0 +1,6 @@
+---
+- name: Configure Kubernetes nodes
+  hosts: all
+  become: yes
+  roles:
+    - ntp

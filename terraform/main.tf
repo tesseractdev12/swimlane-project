@@ -2,7 +2,7 @@ terraform {
   required_providers {
     kind = {
       source  = "tehcyx/kind"
-      version = "0.6.0"   # compatible with your kind v0.29.0
+      version = "0.6.0"   
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
@@ -20,9 +20,23 @@ resource "kind_cluster" "devops_cluster" {
     kind        = "Cluster"
     api_version = "kind.x-k8s.io/v1alpha4"
 
-    # First control plane
+    # First control plane with ingress port mappings
     node {
       role = "control-plane"
+
+      # Map host:80 -> container:80 (HTTP)
+      extra_port_mappings {
+        container_port = 80
+        host_port      = 80
+        protocol       = "TCP"
+      }
+
+      # Map host:443 -> container:443 (HTTPS)
+      extra_port_mappings {
+        container_port = 443
+        host_port      = 443
+        protocol       = "TCP"
+      }
     }
 
     # Additional control planes
@@ -57,7 +71,7 @@ resource "kind_cluster" "devops_cluster" {
   }
 }
 
-# Output kubeconfig path for kubectl
+# Output kubeconfig path for kubectl (optional)
 # output "kubeconfig_path" {
-#  value = kind_cluster.devops_cluster.kubeconfig_path
-#}
+#   value = kind_cluster.devops_cluster.kubeconfig_path
+# }

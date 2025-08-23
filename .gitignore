@@ -54,3 +54,55 @@ dist/
 
 # Ignore all executable files
 *.exe
+
+# OS files
+*.DS_Store
+*.swp
+*.swo
+Thumbs.db
+
+# Python/Ansible
+__pycache__/
+*.pyc
+*.pyo
+*.retry
+
+# Secrets
+*.pem
+*.key
+*.crt
+*.env
+*.env.*
+secrets.yml
+vault.yml
+
+# Packer
+packer_cache/
+*.log
+
+# Docker
+*.tar
+
+# Terraform (if used)
+*.tfstate
+*.tfstate.backup
+.terraform/
+
+# Node/npm (if used)
+node_modules/
+
+# Helm
+helm/swimlane-app/templates/ansible/roles/*/files/
+helm/swimlane-app/templates/ansible/roles/*/vars/
+helm/swimlane-app/templates/ansible/roles/*/defaults/
+
+# Misc
+.envrc
+.idea/
+.vscode/
+
+# Additional ignores
+*.bak
+*.old
+*.vault
+*.gpg
