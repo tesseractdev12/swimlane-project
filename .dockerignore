@@ -83,3 +83,5 @@ dist/
 *.old
 *.vault
 *.gpg
+**/logs/
+**/*.log

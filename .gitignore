@@ -40,6 +40,8 @@ terraform.rc
 # Common development, log, and build files/folders
 logs/
 *.log
+**/logs/
+**/*.log
 tmp/
 temp/
 coverage/
